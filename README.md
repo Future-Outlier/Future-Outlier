@@ -1,5 +1,6 @@
-### Hi there 👋
-![Hacker-Davinci's github stats](https://github-readme-stats.vercel.app/api?username=Hacker-Davinci&orgs=SinicaGroup,Future-Outliers&theme=tokyonight)
+### Hacker-Davinci
+![Hacker-Davinci's github stats](https://github-readme-stats.vercel.app/api?username=Hacker-Davinci&orgs=SinicaGroup,Future-Outliers&theme=tokyonight) </br>
+[![Hacker-Davinci's Medium](https://mediumblog-cards.vercel.app/getMediumBlogs?username=Hacker-Davinci)](https://medium.com/@slashie-person-and-googler.medium.com)
 
 <!--
 **Hacker-Davinci/Hacker-Davinci** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
