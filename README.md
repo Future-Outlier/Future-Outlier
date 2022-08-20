@@ -6,6 +6,7 @@
 - 📝 I regularly write articles on [medium](https://hacker-davinci.github.io/Medium_Articles/)
 - 📄 Know about my experiences [resume](https://hacker-davinci.github.io/CV/HANRU_CHEN_CV.pdf)
 - 📫 How to reach me **eric901201@gmail.com**
+- paper with code contributor with 80+ stars [here](https://github.com/SinicaGroup/Class-agnostic-Few-shot-Object-Counting)
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://linkedin.com/in/hanru-chen" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="hanru-chen" height="30" width="40" /></a>
