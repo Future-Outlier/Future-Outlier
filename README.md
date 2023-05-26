@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Hacker-Davinci</h1>
-<h3 align="center">A Student in Taiwan who aims to be a MAANGer, Youtuber and Medium Blogger.</h3>
+<h3 align="center">A Student in Taiwan who aims to be a Software Engineer, Youtuber and Medium Blogger.</h3>
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=hacker-davinci&label=Profile%20views&color=0e75b6&style=flat" alt="hacker-davinci" /> </p>
 
 - 📷 I film videos on [youtube](https://www.youtube.com/c/%E8%B3%87%E5%B7%A5%E7%B3%BB%E7%9A%84%E6%96%9C%E6%A7%93%E4%BA%BA%E7%94%9F)
