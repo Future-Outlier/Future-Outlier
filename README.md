@@ -1,10 +1,10 @@
 <h1 align="center">Hi 👋, I'm Future-Outlier</h1>
-<h3 align="center">A Student in Taiwan who aims to be a Software Engineer, Youtuber and Medium Blogger.</h3>
+<h3 align="center">A Student in Taiwan who aims to be a Software Engineer, Youtuber, and Medium Blogger.</h3>
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=hacker-davinci&label=Profile%20views&color=0e75b6&style=flat" alt="hacker-davinci" /> </p>
 
 - 📷 I film videos on [youtube](https://www.youtube.com/c/%E8%B3%87%E5%B7%A5%E7%B3%BB%E7%9A%84%E6%96%9C%E6%A7%93%E4%BA%BA%E7%94%9F)
 - 📝 I regularly write articles on [medium](https://Future-Outlier.github.io/Medium_Articles/)
-- 📄 Know about my experiences [resume](https://Future-Outlier.github.io/CV/HANRU_CHEN_CV.pdf)
+- 📄 Know about my experiences [resume](https://Future-Outlier.github.io/CV/ERIC_CHEN_CV.pdf)
 - 📫 How to reach me **eric901201@gmail.com**
 - paper with code contributor with 100+ stars [here](https://github.com/SinicaGroup/Class-agnostic-Few-shot-Object-Counting)
 
