@@ -13,6 +13,7 @@
 - [Flyte Admin Sandbox Email Publisher](https://github.com/flyteorg/flyteadmin/pull/595#event-10049889884)
 - [Flytekit agent ctrl-c handler](https://github.com/flyteorg/flytekit/pull/1782)
 - [Flytekit Add type annotations for base task compile method](https://github.com/flyteorg/flytekit/pull/1789)
+- [Flyte Contribution Guide Video is All You Need !](https://youtu.be/V-KlVQmQAjE)
 
 
 <!--
