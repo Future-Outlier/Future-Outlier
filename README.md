@@ -13,7 +13,8 @@
 - [Flyte Admin Sandbox Email Publisher](https://github.com/flyteorg/flyteadmin/pull/595#event-10049889884)
 - [Flyte Databricks Agent Service](https://github.com/flyteorg/flytekit/pull/1797)
 - [Flytekit agent delete function interface with ctrl-c handler](https://github.com/flyteorg/flytekit/pull/1782)
-- [Flytekit async agent delete function interface with ctrl-c handler](https://github.com/flyteorg/flytekit/pull/1800)
+- [Flytekit async agent delete function interface with ctrl-c handler](https://github.com/flyteorg/flytekit/pull/1802)
+- [FlyteIDL AgentService SyncAgent proto](https://github.com/flyteorg/flyteidl/pull/436)
 - [Flytekit Add type annotations for base task compile method](https://github.com/flyteorg/flytekit/pull/1789)
 - [Flyte Contribution Guide Video is All You Need !](https://youtu.be/V-KlVQmQAjE)
 
