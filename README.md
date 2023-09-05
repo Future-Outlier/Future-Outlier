@@ -17,6 +17,8 @@
 - [FlyteIDL AgentService SyncAgent proto](https://github.com/flyteorg/flyteidl/pull/436)
 - [Flytekit Add type annotations for base task compile method](https://github.com/flyteorg/flytekit/pull/1789)
 - [Flyte Contribution Guide Video is All You Need !](https://youtu.be/V-KlVQmQAjE)
+- [Flyte Plugins Add Pending State in Webapi Agent](https://github.com/flyteorg/flyteplugins/pull/399/files)
+- [Flyte Plugins and Flyte Propeller add supportTaskTypes for agentservice without write it in config twice](https://github.com/flyteorg/flyteplugins/pull/398)
 
 
 <!--
