@@ -11,12 +11,12 @@
 <h1 align="center">My Open Source Contribution at Flyte</h1>
 
 - [Flyte Admin Sandbox Email Publisher](https://github.com/flyteorg/flyteadmin/pull/595#event-10049889884)
-- [(PENDING) Flyte Databricks Agent Service](https://github.com/flyteorg/flytekit/pull/1797)
+- [Flyte Databricks Agent Service for companies such as HBO](https://github.com/flyteorg/flytekit/pull/1797)
 - [Flytekit agent delete function interface with ctrl-c handler](https://github.com/flyteorg/flytekit/pull/1782)
-- [Flytekit async agent delete function interface with ctrl-c handler and convert to flyte state test function](https://github.com/flyteorg/flytekit/pull/1802)
-- [(PENDING) FlyteIDL AgentService SyncAgent proto](https://github.com/flyteorg/flyteidl/pull/436)
 - [Flytekit Add type annotations for base task compile method](https://github.com/flyteorg/flytekit/pull/1789)
 - [Flyte Contribution Guide Video is All You Need !](https://youtu.be/V-KlVQmQAjE)
+- [Flytekit async agent delete function interface with ctrl-c handler and convert to flyte state test function](https://github.com/flyteorg/flytekit/pull/1802)
+- [(PENDING) FlyteIDL AgentService SyncAgent proto](https://github.com/flyteorg/flyteidl/pull/436)
 - [(PENDING) Flyte Plugins Add Pending State in Webapi Agent](https://github.com/flyteorg/flyteplugins/pull/399/files)
 - [(PENDING) Flyte Plugins and Flyte Propeller add supportTaskTypes for agentservice without write it in config twice](https://github.com/flyteorg/flyteplugins/pull/398)
 
