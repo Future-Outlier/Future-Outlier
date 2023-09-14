@@ -18,6 +18,8 @@
 - [Flytekit async agent delete function interface with ctrl-c handler and convert to flyte state test function](https://github.com/flyteorg/flytekit/pull/1802)
 - [(PENDING) FlyteIDL AgentService SyncAgent proto](https://github.com/flyteorg/flyteidl/pull/436)
 - [(PENDING) Flyte Plugins Add Pending State in Webapi Agent](https://github.com/flyteorg/flyteplugins/pull/399/files)
+- [(PENDING) Flytekit Add Agent Get Message Proto](https://github.com/flyteorg/flytekit/pull/1834)
+- [(PENDING) FlyteIDL Add Agent Get Message Proto](https://github.com/flyteorg/flyteidl/pull/440)
 - [(PENDING) Flyte Plugins and Flyte Propeller add supportTaskTypes for agentservice without write it in config twice](https://github.com/flyteorg/flyteplugins/pull/398)
 
 
