@@ -21,7 +21,7 @@
 - [(PENDING) FlyteKit Add Agent Serve Get Message Function](https://github.com/flyteorg/flytekit/pull/1834)
 - [(PENDING) FlyteIDL Add Agent Get Message Proto](https://github.com/flyteorg/flyteidl/pull/440)
 - [(PENDING) FlytePlugins and Flyte Propeller add supportTaskTypes for agent service without write it in config twice](https://github.com/flyteorg/flyteplugins/pull/398)
-- [(PENDING) Flyte Enable Agent Services Config Map by kustmoization](https://github.com/flyteorg/flyte/pull/4041)
+- [(PENDING) Flyte Enable Agent Services Config Map by kustmoization and helm](https://github.com/flyteorg/flyte/pull/4041)
 - [(PENDING) FlyteCTL Enable Agent Flag in Command Line](https://github.com/flyteorg/flytectl/pull/420)
 - [(Developing) FlyteKit Chatgpt Agent and Agent Do Task Function](https://github.com/flyteorg/flytekit/pull/1822)
 - [(Developing) FlytePlugins Sync Plugin Interface](https://github.com/flyteorg/flyteplugins/pull/402)
