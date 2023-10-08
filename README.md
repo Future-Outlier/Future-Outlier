@@ -17,6 +17,7 @@
 - [Flyte Contribution Guide Video is All You Need!](https://youtu.be/V-KlVQmQAjE)
 - [FlyteKit async agent delete function interface with ctrl-c handler and convert to flyte state test function](https://github.com/flyteorg/flytekit/pull/1802)
 - [FlyteKit Fix py38 async agent service and add async agent test by using "run_in_executor"](https://github.com/flyteorg/flytekit/pull/1866)
+- [(PENDING) Support Evaluator in Kubeflow TensorFlow Training Operator](https://github.com/flyteorg/flyte/pull/4168)
 - [(PENDING) Flyte [Docs] Add Agent Service Doc in Databricks Plugin](https://github.com/flyteorg/flyte/pull/4008)
 - [(PENDING) FlytePlugins Add Pending State and State Message in Webapi Agent](https://github.com/flyteorg/flyte/pull/4106)
 - [(PENDING) FlyteKit Add Agent Serve Get Message Function](https://github.com/flyteorg/flytekit/pull/1834)
