@@ -16,16 +16,14 @@
 - [FlyteKit Add type annotations for base task compile method](https://github.com/flyteorg/flytekit/pull/1789)
 - [Flyte Contribution Guide Video is All You Need!](https://youtu.be/V-KlVQmQAjE)
 - [FlyteKit async agent delete function interface with ctrl-c handler and convert to flyte state test function](https://github.com/flyteorg/flytekit/pull/1802)
-- [FlytePlugins and Flyte Propeller add supportTaskTypes for agent service without write it in config twice](https://github.com/flyteorg/flyteplugins/pull/398)
-- [(PENDING) FlytePlugins Add Pending State and State Message in Webapi Agent](https://github.com/flyteorg/flyteplugins/pull/399/files)
+- [FlyteKit Fix py38 async agent service and add async agent test by using "run_in_executor"](https://github.com/flyteorg/flytekit/pull/1866)
+- [(PENDING) FlytePlugins Add Pending State and State Message in Webapi Agent](https://github.com/flyteorg/flyte/pull/4106)
 - [(PENDING) FlyteKit Add Agent Serve Get Message Function](https://github.com/flyteorg/flytekit/pull/1834)
-- [(PENDING) FlyteIDL Add Agent Get Message Proto](https://github.com/flyteorg/flyteidl/pull/440)
-- [(PENDING) Flyte Enable Agent Services Config Map by kustmoization and helm](https://github.com/flyteorg/flyte/pull/4041)
-- [(PENDING) FlyteCTL Enable Agent Flag in Command Line](https://github.com/flyteorg/flytectl/pull/420)
-- [(PENDING) FlyteKit Agent Service Task and Do Task Function bug fixed](https://github.com/flyteorg/flytekit/pull/1848)
+- [(PENDING) Flyte Add Enable/Disable Options for Agent Services](https://github.com/flyteorg/flyte/pull/4041)
+- [(PENDING) FlyteCTL Add Enable/Disable Options for Agent Services](https://github.com/flyteorg/flytectl/pull/420)
+- [(DEVELOPING) Flyte Sync Plugin Interface](https://github.com/flyteorg/flyte/pull/4107)
 - [(DEVELOPING) FlyteKit Chatgpt Agent and Agent Do Task Function](https://github.com/flyteorg/flytekit/pull/1822)
-- [(DEVELOPING) FlytePlugins Sync Plugin Interface](https://github.com/flyteorg/flyteplugins/pull/402)
-- [(DEVELOPING) FlyteIDL AgentService SyncAgent Do Function proto](https://github.com/flyteorg/flyteidl/pull/436)
+
 
 
 <!--
