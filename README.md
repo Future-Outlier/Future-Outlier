@@ -25,8 +25,7 @@
 - [(PENDING) FlyteCTL Add Enable/Disable Options for Agent Services](https://github.com/flyteorg/flytectl/pull/420)
 - [(DEVELOPING) Flyte Sync Plugin Interface with UNION.AI and Spotify](https://github.com/flyteorg/flyte/pull/4107)
 - [(DEVELOPING) FlyteKit Chatgpt Agent and Agent Do Task Function with UNION.AI and Spotify](https://github.com/flyteorg/flytekit/pull/1822)
-
-
+- [Added GPU enabled sandbox image](https://github.com/flyteorg/flyte/pull/4340)
 
 <!--
 <h3 align="left">Connect with me:</h3>
