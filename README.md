@@ -13,14 +13,15 @@
 ## Agent
 Summary
 
-- Create 27+ PRs with Union.ai, Spotify, Recogni, and HBO, you can check contributions [here](https://github.com/flyteorg/flyte/issues/3936).
+- Create 27+ PRs with Union.ai, Spotify, Recogni, and HBO, you can check contributions [here](https://github.com/flyteorg/flyte/issues/3936)
+- Introduce Agent Feature with Union.ai, Linkedin, and Line to Taiwan's Companies such as DCARD.
 
 Selected PRs
 
 - Agent Sync Plugin Interface with 81 conversations with Union.ai and Spotify, learn error handling in large system and avoid breaking changes in this PR
 - Agent Metadata Servicer with 36 conversations with Union.ai and Spotify
 - Databricks Agent with Union.ai and used by HBO
-- ChatGPT Agent with Union.ai, Spotify, and Recogni
+- ChatGPT Agent with Union.ai, Spotify, and Recogni, demo in Community Sync and be thanked by Union.ai CEO
 - LangChain Agent with Union.ai
 - Minio Credential to Agent Server by helm and kustomization
 - Add Agent Client Set with Union.ai
@@ -30,7 +31,7 @@ Selected PRs
 ## FlyteInteractive
 Summary
 
-- Create 5+ PRs with Union.ai and Linkedin you can check contributions [here](https://github.com/flyteorg/flyte/issues/4284).
+- Create 5+ PRs with Union.ai and Linkedin you can check contributions [here](https://github.com/flyteorg/flyte/issues/4284)
 - [Linkedin Engineering Blog](https://www.linkedin.com/blog/engineering/open-source/open-sourcing-flyteinteractive#)
 
 Selected PRs
@@ -41,13 +42,22 @@ Selected PRs
 - Wrote Docs
 
 ## Kubeflow Training Operator
+Summary
 
+- Create 6+ PRs with Union.ai, Linkedin and ShareChat(Pytorch Ignite Author and Pytorch Torchvision Maintainer) you can check contributions [here](https://github.com/flyteorg/flyte/issues/4167)
 
+Selected PRs
+
+- Add Evaluator in Kubeflow Tensorflow Traning Operator with Union.ai and Linkedin
+- Refactor `GetReplicaFunc`, for better error handling and fixed bug with Union.ai
+- Add Node Selector attribute to KF plugins with Union.ai, Pytorch Ignite Author, and Pytorch Torchvision Maintainer
 
 ## Flyte Core Feature
 
 ## Flyte Applications
 
+- union-assistant
+- FlyteChatGPT Summary Bot
 
 - [FlyteAdmin Sandbox Email Publisher](https://github.com/flyteorg/flyteadmin/pull/595#event-10049889884)
 - [Flyte Databricks Agent Service for companies such as HBO](https://github.com/flyteorg/flytekit/pull/1797)
