@@ -28,8 +28,21 @@ Selected PRs
 - Tons of Docs Improvement
 
 ## FlyteInteractive
+Summary
+
+- Create 5+ PRs with Union.ai and Linkedin you can check contributions [here](https://github.com/flyteorg/flyte/issues/4284).
+- [Linkedin Engineering Blog](https://www.linkedin.com/blog/engineering/open-source/open-sourcing-flyteinteractive#)
+
+Selected PRs
+
+- Add Predefined URLs and Default Extensions in Flyteinteractive
+- Fixed download repeated extensions bug
+- Fixed download code-server bug in FlyteIneractive Dockerfile
+- Wrote Docs
 
 ## Kubeflow Training Operator
+
+
 
 ## Flyte Core Feature
 
