@@ -13,14 +13,19 @@
 ## Agent
 Summary
 
-- Create 25+ PRs with Union.ai, Spotify, and HBO, you can check contributions [here](https://github.com/flyteorg/flyte/issues/3936).
+- Create 25+ PRs with Union.ai, Spotify, Recogni, and HBO, you can check contributions [here](https://github.com/flyteorg/flyte/issues/3936).
 
 Selected PRs
 
-- Add Sync Plugin Interface, with 81 conversations with Union.ai and Spotify
-- Add Agent Metadata Servicer, with 36 conversations with Union.ai and Spotify
-- Add minio credential to agent server by helm and kustomization
-- 
+- Agent Sync Plugin Interface with 81 conversations with Union.ai and Spotify, learn error handling in large system and avoid breaking changes in this PR
+- Agent Metadata Servicer with 36 conversations with Union.ai and Spotify
+- Databricks Agent with Union.ai and used by HBO
+- ChatGPT Agent with Union.ai, Spotify, and Recogni
+- LangChain Agent with Union.ai
+- Minio Credential to Agent Server by helm and kustomization
+- Add Agent Client Set with Union.ai
+- Tons of Base Agent Architecture Improvement and Bug Fixes
+- Tons of Docs Improvement
 
 ## FlyteInteractive
 
