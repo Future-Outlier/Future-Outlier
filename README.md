@@ -16,12 +16,13 @@ Summary
 - Create 27+ PRs with Union.ai, Spotify, Recogni, and HBO, you can check contributions [here](https://github.com/flyteorg/flyte/issues/3936)
 - Introduce Agent Feature with Union.ai, Linkedin, and Line to Taiwan's Companies such as DCARD.
 
-Selected PRs
+Selected Contributions
 
 - Agent Sync Plugin Interface with 81 conversations with Union.ai and Spotify, learn error handling in large system and avoid breaking changes in this PR
 - Agent Metadata Servicer with 36 conversations with Union.ai and Spotify
 - Databricks Agent with Union.ai and used by HBO
 - ChatGPT Agent with Union.ai, Spotify, and Recogni, demo in Community Sync and be thanked by Union.ai CEO
+- Airflow Agent with Union.ai
 - LangChain Agent with Union.ai
 - Minio Credential to Agent Server by helm and kustomization
 - Add Agent Client Set with Union.ai
@@ -34,7 +35,7 @@ Summary
 - Create 5+ PRs with Union.ai and Linkedin you can check contributions [here](https://github.com/flyteorg/flyte/issues/4284)
 - [Linkedin Engineering Blog](https://www.linkedin.com/blog/engineering/open-source/open-sourcing-flyteinteractive#)
 
-Selected PRs
+Selected Contributions
 
 - Add Predefined URLs and Default Extensions in Flyteinteractive
 - Fixed download repeated extensions bug
@@ -46,35 +47,30 @@ Summary
 
 - Create 6+ PRs with Union.ai, Linkedin and ShareChat(Pytorch Ignite Author and Pytorch Torchvision Maintainer) you can check contributions [here](https://github.com/flyteorg/flyte/issues/4167)
 
-Selected PRs
+Selected Contributions
 
 - Add Evaluator in Kubeflow Tensorflow Traning Operator with Union.ai and Linkedin
 - Refactor `GetReplicaFunc`, for better error handling and fixed bug with Union.ai
 - Add Node Selector attribute to KF plugins with Union.ai, Pytorch Ignite Author, and Pytorch Torchvision Maintainer
 
 ## Flyte Core Feature
+Summary
+
+- Create tons of PRs with Flyte Maintainers and Union.ai, you can check contributions in [flyte](https://github.com/flyteorg/flyte/commits?author=Future-Outlier), [flytekit](https://github.com/flyteorg/flytekit/commits?author=Future-Outlier), [flytectl](https://github.com/flyteorg/flytectl/commits?author=Future-Outlier) and [flytesnacks](https://github.com/flyteorg/flytesnacks/commits?author=Future-Outlier)
+
+Selected Contributions
+
+- Sandbox Notifications Processor and Processor
+- Support Databricks Plugin with 2.1 version with Union.ai for HBO
+- Remove cache in Dockerfile
+- Replace storage with ephemeral storage in task resource
+- Support GPU in sandbox
+- Fixed CI errors and bugs
+- Added Tests to improve code coverage
 
 ## Flyte Applications
-
-- union-assistant
 - FlyteChatGPT Summary Bot
 
-- [FlyteAdmin Sandbox Email Publisher](https://github.com/flyteorg/flyteadmin/pull/595#event-10049889884)
-- [Flyte Databricks Agent Service for companies such as HBO](https://github.com/flyteorg/flytekit/pull/1797)
-- [FlyteKit agent delete function interface with ctrl-c handler](https://github.com/flyteorg/flytekit/pull/1782)
-- [FlyteKit Add type annotations for base task compile method](https://github.com/flyteorg/flytekit/pull/1789)
-- [Flyte Contribution Guide Video is All You Need!](https://youtu.be/V-KlVQmQAjE)
-- [FlyteKit async agent delete function interface with ctrl-c handler and convert to flyte state test function](https://github.com/flyteorg/flytekit/pull/1802)
-- [FlyteKit Fix py38 async agent service and add async agent test by using "run_in_executor"](https://github.com/flyteorg/flytekit/pull/1866)
-- [Support Evaluator in Kubeflow TensorFlow Training Operator](https://github.com/flyteorg/flyte/pull/4168)
-- [Add Agent Service Doc in Databricks Plugin](https://github.com/flyteorg/flyte/pull/4008)
-- [FlytePlugins Add Pending State and State Message in Webapi Agent](https://github.com/flyteorg/flyte/pull/4106)
-- [FlyteKit Add Agent Serve Get Message Function](https://github.com/flyteorg/flytekit/pull/1834)
-- [Flyte Add Enable/Disable Options for Agent Services](https://github.com/flyteorg/flyte/pull/4041)
-- [FlyteCTL Add Enable/Disable Options for Agent Services](https://github.com/flyteorg/flytectl/pull/420)
-- [Flyte Sync Plugin Interface with UNION.AI and Spotify](https://github.com/flyteorg/flyte/pull/4107)
-- [FlyteKit Chatgpt Agent and Agent Do Task Function with UNION.AI and Spotify](https://github.com/flyteorg/flytekit/pull/1822)
-- [Added GPU enabled sandbox image](https://github.com/flyteorg/flyte/pull/4340)
 
 <!--
 <h3 align="left">Connect with me:</h3>
