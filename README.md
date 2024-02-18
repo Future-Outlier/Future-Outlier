@@ -13,7 +13,7 @@
 ## Agent
 Summary
 
-- Create 25+ PRs with Union.ai, Spotify, Recogni, and HBO, you can check contributions [here](https://github.com/flyteorg/flyte/issues/3936).
+- Create 27+ PRs with Union.ai, Spotify, Recogni, and HBO, you can check contributions [here](https://github.com/flyteorg/flyte/issues/3936).
 
 Selected PRs
 
