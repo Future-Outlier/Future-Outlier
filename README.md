@@ -10,7 +10,7 @@
 
 <h1 align="center">My Open Source Contributions at Flyte</h1>
 
-## Agent
+## Agent Feature (long-running stateless gRPC service with scalability and language-agnostic)
 Summary
 
 - Create 27+ PRs with Union.ai, Spotify, Recogni, and HBO, you can check contributions [here](https://github.com/flyteorg/flyte/issues/3936)
@@ -29,7 +29,7 @@ Selected Contributions
 - Tons of Base Agent Architecture Improvement and Bug Fixes
 - Tons of Docs Improvement
 
-## FlyteInteractive
+## FlyteInteractive Feature (1st interactive debug tool on workflow orchestrator in the world)
 Summary
 
 - Create 5+ PRs with Union.ai and Linkedin you can check contributions [here](https://github.com/flyteorg/flyte/issues/4284)
@@ -42,7 +42,7 @@ Selected Contributions
 - Fixed download code-server bug in FlyteIneractive Dockerfile
 - Wrote Docs
 
-## Kubeflow Training Operator
+## Kubeflow Training Operator Plugin (Kubernetes Operator backend plugin)
 Summary
 
 - Create 6+ PRs with Union.ai, Linkedin and ShareChat(Pytorch Ignite Author and Pytorch Torchvision Maintainer) you can check contributions [here](https://github.com/flyteorg/flyte/issues/4167)
