@@ -8,7 +8,28 @@
 - 📫 How to reach me **eric901201@gmail.com**
 - paper with code contributor with 100+ stars [here](https://github.com/SinicaGroup/Class-agnostic-Few-shot-Object-Counting)
 
-<h1 align="center">My Open Source 200+ Contributions at Flyte</h1>
+<h1 align="center">My Open Source Contributions at Flyte</h1>
+
+## Agent
+Summary
+
+- Create 25+ PRs with Union.ai, Spotify, and HBO, you can check contributions [here](https://github.com/flyteorg/flyte/issues/3936).
+
+Selected PRs
+
+- Add Sync Plugin Interface, with 81 conversations with Union.ai and Spotify
+- Add Agent Metadata Servicer, with 36 conversations with Union.ai and Spotify
+- Add minio credential to agent server by helm and kustomization
+- 
+
+## FlyteInteractive
+
+## Kubeflow Training Operator
+
+## Flyte Core Feature
+
+## Flyte Applications
+
 
 - [FlyteAdmin Sandbox Email Publisher](https://github.com/flyteorg/flyteadmin/pull/595#event-10049889884)
 - [Flyte Databricks Agent Service for companies such as HBO](https://github.com/flyteorg/flytekit/pull/1797)
