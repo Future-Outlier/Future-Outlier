@@ -4,7 +4,7 @@
 
 - 📷 I film videos on [youtube](https://www.youtube.com/c/%E8%B3%87%E5%B7%A5%E7%B3%BB%E7%9A%84%E6%96%9C%E6%A7%93%E4%BA%BA%E7%94%9F)
 - 📝 I regularly write articles on [medium](https://future-outlier.medium.com/)
-- 📄 Know about my experiences [resume](https://drive.google.com/drive/u/1/folders/1jD0vbYqnXYblG6CsvC-ZDguMEYkV7Uf4)
+- 📄 Know about my experiences [resume](https://drive.google.com/file/d/1HlnmBUAPkuEfEA11emRpWD-kNGl5Worr/view?usp=sharing)
 - 📫 How to reach me **eric901201@gmail.com**
 - paper with code contributor with 100+ stars [here](https://github.com/SinicaGroup/Class-agnostic-Few-shot-Object-Counting)
 
