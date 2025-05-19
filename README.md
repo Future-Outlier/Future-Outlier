@@ -8,8 +8,9 @@
 
 <h1 align="center">My Open Source Contributions at Flyte</h1>
 
-https://github.com/search?q=is%3Apr+author%3Afuture-outlier+org%3Aflyteorg+is%3Amerged++&type=pullrequests&state=closed
+Merged PRs: https://github.com/search?q=is%3Apr+author%3Afuture-outlier+org%3Aflyteorg+is%3Amerged++&type=pullrequests&state=closed
 
+Reviewed PRs: https://github.com/search?q=+org%3Aflyteorg+reviewed-by%3Afuture-outlier+is%3Apr+is%3Aclosed&type=pullrequests&state=closed
 
 <h1 align="center"> OSS RANK </h1>
 
