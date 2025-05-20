@@ -11,8 +11,3 @@
 Merged PRs: https://github.com/search?q=is%3Apr+author%3Afuture-outlier+org%3Aflyteorg+is%3Amerged++&type=pullrequests&state=closed
 
 Reviewed PRs: https://github.com/search?q=+org%3Aflyteorg+reviewed-by%3Afuture-outlier+is%3Apr+is%3Aclosed&type=pullrequests&state=closed
-
-<h1 align="center"> OSS RANK </h1>
-
-
-[![OSSRank](https://ossrank.com/widget/886376)](https://ossrank.com/c/886376-future-outlier)
