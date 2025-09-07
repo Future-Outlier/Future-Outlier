@@ -1,106 +1,143 @@
-import requests
 import os
 import re
-from datetime import datetime
+import requests
 from collections import defaultdict
+from datetime import datetime
+from typing import Dict, List, Any, Set, Optional
 
-GITHUB_USERNAME = 'future-outlier'
-TOKEN = os.getenv('GITHUB_TOKEN')
+# --- Configuration ---
+# 將你的 GitHub 使用者名稱和要處理的組織列表放在這裡
+GITHUB_USERNAME: str = 'future-outlier'
+ORGS_TO_PROCESS: List[str] = ['flyteorg', 'ray-project']
+README_FILE_PATH: str = 'README.md'
 
-HEADERS = {
+# 從環境變數讀取 GitHub Token
+TOKEN: Optional[str] = os.getenv('GITHUB_TOKEN')
+HEADERS: Dict[str, str] = {
     'Authorization': f'Bearer {TOKEN}',
     'Accept': 'application/vnd.github.v3+json',
 }
 
-def test_github_connection():
-    """Test GitHub API connection"""
+# --- GitHub API Functions ---
+
+def test_github_connection() -> bool:
+    """
+    測試與 GitHub API 的連線是否正常並驗證身份。
+    """
     if not TOKEN:
-        print("❌ Error: GITHUB_TOKEN environment variable is not set!")
-        print("Please set your GitHub token:")
-        print("export GITHUB_TOKEN=your_token_here")
+        print("❌ 錯誤：環境變數 GITHUB_TOKEN 未設定！")
+        print("請設定您的 GitHub Personal Access Token：")
+        print("export GITHUB_TOKEN='your_token_here'")
         return False
     
-    # Test with a simple API call
-    test_url = "https://api.github.com/user"
-    response = requests.get(test_url, headers=HEADERS)
-    
-    if response.status_code == 200:
+    try:
+        response = requests.get("https://api.github.com/user", headers=HEADERS, timeout=10)
+        response.raise_for_status()  # 如果狀態碼不是 2xx，則會拋出異常
         user_data = response.json()
-        print(f"✅ GitHub API connection successful!")
-        print(f"Authenticated as: {user_data.get('login', 'Unknown')}")
+        print(f"✅ GitHub API 連線成功！已驗證身份為：{user_data.get('login', '未知')}")
         return True
-    else:
-        print(f"❌ GitHub API connection failed: {response.status_code}")
-        print(f"Response: {response.text}")
+    except requests.exceptions.RequestException as e:
+        print(f"❌ GitHub API 連線失敗：{e}")
         return False
 
-def fetch_all_prs(org, role):
-    """Fetch all PRs for a specific organization and role"""
-    all_prs = []
+def fetch_all_prs(org: str, role: str) -> List[Dict[str, Any]]:
+    """
+    分頁獲取指定組織中，使用者擔任特定角色的所有 PR。
+    角色可以是 'author' (作者) 或 'reviewed' (審核者)。
+    """
+    all_prs: List[Dict[str, Any]] = []
     page = 1
-    per_page = 100
+    
+    # 根據角色構建查詢語句
+    if role == 'author':
+        query = f'org:{org} type:pr author:{GITHUB_USERNAME} is:merged'
+    else:  # 'reviewed'
+        query = f'org:{org} reviewed-by:{GITHUB_USERNAME} is:pr is:merged -author:{GITHUB_USERNAME}'
+        
+    print(f"    - 開始獲取作為 {role} 的 PR...")
     
     while True:
-        if role == 'author':
-            # 獲取作者的所有 merged PR
-            url = f'https://api.github.com/search/issues?q=org:{org}+type:pr+author:{GITHUB_USERNAME}+is:merged&per_page={per_page}&page={page}'
-        else:  # reviewed
-            # 獲取審核的所有已關閉 PR（非作者創建的）
-            url = f'https://api.github.com/search/issues?q=org:{org}+reviewed-by:{GITHUB_USERNAME}+is:pr+is:merged+-author:{GITHUB_USERNAME}&per_page={per_page}&page={page}'
-        
-        response = requests.get(url, headers=HEADERS)
-        if response.status_code == 200:
+        params = {'q': query, 'per_page': 100, 'page': page}
+        try:
+            response = requests.get(
+                "https://api.github.com/search/issues", 
+                headers=HEADERS, 
+                params=params,
+                timeout=30
+            )
+            response.raise_for_status()
             data = response.json()
             prs = data.get('items', [])
+            
             if not prs:
                 break
+                
             all_prs.extend(prs)
             page += 1
-        else:
-            print(f'Error fetching {role} PRs for {org}: {response.status_code}')
-            print(f'Response: {response.text}')
+            
+            # 如果這頁的結果少於 100，表示是最後一頁
+            if len(prs) < 100:
+                break
+                
+        except requests.exceptions.RequestException as e:
+            print(f"    ❌ 獲取 {org} 的 {role} PRs 時出錯：{e}")
             break
-    
+            
+    print(f"    - 完成，共找到 {len(all_prs)} 個作為 {role} 的 PR。")
     return all_prs
 
-def generate_contribution_chart(org, authored_prs, reviewed_prs):
-    """Generate SVG chart for all contributions"""
-    # Group PRs by year
-    authored_by_year = defaultdict(int)
-    reviewed_by_year = defaultdict(int)
+# --- SVG Chart Generation ---
+
+def get_y_axis_config(max_value: int) -> tuple[int, list[int]]:
+    """計算 Y 軸的最大值和刻度。"""
+    if max_value == 0:
+        return 10, [0, 2, 4, 6, 8, 10]
     
+    # 找到一個比最大值略大的 "漂亮" 數字 (例如 10 的倍數)
+    order_of_magnitude = 10 ** (len(str(max_value)) - 1)
+    y_max = ((max_value // order_of_magnitude) + 1) * order_of_magnitude
+    
+    # 產生 5 個刻度
+    ticks = [int(y_max / 5 * i) for i in range(6)]
+    return y_max, ticks
+
+def generate_svg_chart(org: str, authored_prs: List[Dict], reviewed_prs: List[Dict]) -> str:
+    """
+    產生一個分組長條圖的 SVG 字串，用於視覺化年度貢獻。
+    """
+    # 1. 處理數據：按年份分組
+    authored_by_year: Dict[str, int] = defaultdict(int)
     for pr in authored_prs:
-        merged_date = pr.get('merged_at', '')
-        if merged_date:
-            year = merged_date[:4]  # YYYY
+        if 'pull_request' in pr and pr['pull_request'].get('merged_at'):
+            year = pr['pull_request']['merged_at'][:4]
             authored_by_year[year] += 1
-    
+
+    reviewed_by_year: Dict[str, int] = defaultdict(int)
     for pr in reviewed_prs:
-        closed_date = pr.get('closed_at', '')
-        if closed_date:
-            year = closed_date[:4]  # YYYY
+        if pr.get('closed_at'):
+            year = pr['closed_at'][:4]
             reviewed_by_year[year] += 1
     
-    # Get all years in range
-    all_years = set(authored_by_year.keys()) | set(reviewed_by_year.keys())
-    all_years = sorted(list(all_years))
-    
+    all_years: List[str] = sorted(list(set(authored_by_year.keys()) | set(reviewed_by_year.keys())))
+
     if not all_years:
-        return f"<p>No contributions found for {org}</p>"
+        return f"<p>在 {org} 中沒有找到貢獻記錄。</p>"
+
+    # 2. SVG 尺寸和樣式設定
+    width, height = 800, 400
+    margin = {'top': 70, 'right': 40, 'bottom': 80, 'left': 60}
+    chart_width = width - margin['left'] - margin['right']
+    chart_height = height - margin['top'] - margin['bottom']
     
-    # Generate SVG
-    width = 800
-    height = 400
-    margin = 50
-    chart_width = width - 2 * margin
-    chart_height = height - 2 * margin
+    max_count = max(max(authored_by_year.values() or [0]), max(reviewed_by_year.values() or [0]))
+    y_max, y_ticks = get_y_axis_config(max_count)
+
+    # 3. 繪製 SVG
+    svg_parts = []
     
-    max_contributions = max(
-        max(authored_by_year.values(), default=0),
-        max(reviewed_by_year.values(), default=0)
-    )
-    
-    svg = f'''<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">
+    # SVG 開頭和樣式定義
+    svg_parts.append(f'<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">')
+    svg_parts.append(f'''
     <defs>
         <linearGradient id="authoredGradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style="stop-color:#28a745;stop-opacity:1" />
@@ -111,150 +148,134 @@ def generate_contribution_chart(org, authored_prs, reviewed_prs):
             <stop offset="100%" style="stop-color:#6f42c1;stop-opacity:1" />
         </linearGradient>
     </defs>
-    
-    <!-- Background -->
-    <rect width="{width}" height="{height}" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
-    
-    <!-- Title -->
-    <text x="{width//2}" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#212529">
-        {org.title()} Contributions History
-    </text>
-    
-    <!-- Chart area -->
-    <rect x="{margin}" y="{margin}" width="{chart_width}" height="{chart_height}" fill="white" stroke="#dee2e6" stroke-width="1"/>
-    
-    <!-- Y-axis labels -->
-    <text x="{margin-10}" y="{margin+15}" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6c757d">PRs</text>
-    '''
-    
-    # Draw Y-axis grid lines and labels
-    for i in range(6):
-        y = margin + (chart_height * i / 5)
-        value = int(max_contributions * (5-i) / 5)
-        svg += f'<line x1="{margin}" y1="{y}" x2="{margin+chart_width}" y2="{y}" stroke="#e9ecef" stroke-width="1"/>'
-        svg += f'<text x="{margin-15}" y="{y+5}" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#6c757d">{value}</text>'
-    
-    # Draw bars
-    bar_width = chart_width / (len(all_years) * 2.5)
-    spacing = bar_width * 0.1
-    
-    for i, year in enumerate(all_years):
-        x = margin + (chart_width * i / len(all_years)) + spacing
-        
-        # Authored PRs bar
-        authored_count = authored_by_year.get(year, 0)
-        authored_height = (authored_count / max_contributions) * chart_height if max_contributions > 0 else 0
-        authored_y = margin + chart_height - authored_height
-        
-        svg += f'<rect x="{x}" y="{authored_y}" width="{bar_width}" height="{authored_height}" fill="url(#authoredGradient)" stroke="#28a745" stroke-width="1"/>'
-        
-        # Reviewed PRs bar
-        reviewed_count = reviewed_by_year.get(year, 0)
-        reviewed_height = (reviewed_count / max_contributions) * chart_height if max_contributions > 0 else 0
-        reviewed_y = margin + chart_height - reviewed_height
-        
-        svg += f'<rect x="{x + bar_width + spacing}" y="{reviewed_y}" width="{bar_width}" height="{reviewed_height}" fill="url(#reviewedGradient)" stroke="#007bff" stroke-width="1"/>'
-        
-        # Year labels
-        svg += f'<text x="{x + bar_width}" y="{margin + chart_height + 20}" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6c757d">{year}</text>'
-    
-    # Legend
-    legend_x = margin + chart_width - 200
-    legend_y = margin - 10
-    
-    svg += f'''
-    <!-- Legend -->
-    <rect x="{legend_x}" y="{legend_y-20}" width="180" height="40" fill="white" stroke="#dee2e6" stroke-width="1" rx="5"/>
-    <rect x="{legend_x+10}" y="{legend_y-10}" width="12" height="12" fill="url(#authoredGradient)"/>
-    <text x="{legend_x+30}" y="{legend_y-2}" font-family="Arial, sans-serif" font-size="12" fill="#212529">Merged PRs</text>
-    <rect x="{legend_x+10}" y="{legend_y+5}" width="12" height="12" fill="url(#reviewedGradient)"/>
-    <text x="{legend_x+30}" y="{legend_y+13}" font-family="Arial, sans-serif" font-size="12" fill="#212529">Reviewed PRs</text>
-    
-    <!-- Stats -->
-    <text x="{margin}" y="{margin + chart_height + 50}" font-family="Arial, sans-serif" font-size="12" fill="#6c757d">
-        Total Merged PRs: {len(authored_prs)} | Total Reviewed PRs: {len(reviewed_prs)}
-    </text>
-    <text x="{margin}" y="{margin + chart_height + 70}" font-family="Arial, sans-serif" font-size="10" fill="#6c757d">
-        Last updated: {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}
-    </text>
-    </svg>'''
-    
-    return svg
+    <style>
+        .title {{ font: bold 18px sans-serif; fill: #212529; text-anchor: middle; }}
+        .axis-label {{ font: 12px sans-serif; fill: #6c757d; }}
+        .tick-label {{ font: 10px sans-serif; fill: #6c757d; text-anchor: end; }}
+        .bar-label {{ font: 9px sans-serif; fill: #333; text-anchor: middle; }}
+        .legend-text {{ font: 12px sans-serif; fill: #212529; }}
+        .stats-text {{ font: 12px sans-serif; fill: #6c757d; }}
+        .update-text {{ font: 10px sans-serif; fill: #6c757d; }}
+    </style>
+    <rect width="100%" height="100%" fill="#f8f9fa" />
+    <rect x="{margin['left']}" y="{margin['top']}" width="{chart_width}" height="{chart_height}" fill="white" stroke="#dee2e6"/>
+    ''')
 
-def update_readme():
-    """Update README with contribution stats and charts"""
-    # Test connection first
+    # 標題
+    svg_parts.append(f'<text x="{width/2}" y="35" class="title">{org.replace("-", " ").title()} Contributions History</text>')
+
+    # Y 軸
+    svg_parts.append(f'<text transform="translate({margin["left"]-35}, {margin["top"] + chart_height/2}) rotate(-90)" class="axis-label" text-anchor="middle">PRs</text>')
+    for tick in y_ticks:
+        y = margin['top'] + chart_height - (tick / y_max * chart_height)
+        svg_parts.append(f'<line x1="{margin["left"]}" y1="{y}" x2="{margin["left"] + chart_width}" y2="{y}" stroke="#e9ecef"/>')
+        svg_parts.append(f'<text x="{margin["left"]-8}" y="{y+3}" class="tick-label">{tick}</text>')
+
+    # X 軸和長條圖 (分組長條圖邏輯)
+    group_width = chart_width / len(all_years)
+    bar_width = group_width * 0.3
+    bar_padding = (group_width - 2 * bar_width) / 3
+
+    for i, year in enumerate(all_years):
+        group_x = margin['left'] + i * group_width
+        
+        # Authored PR Bar
+        authored_count = authored_by_year.get(year, 0)
+        authored_h = (authored_count / y_max) * chart_height if y_max > 0 else 0
+        authored_x = group_x + bar_padding
+        authored_y = margin['top'] + chart_height - authored_h
+        svg_parts.append(f'<rect x="{authored_x}" y="{authored_y}" width="{bar_width}" height="{authored_h}" fill="url(#authoredGradient)"/>')
+        svg_parts.append(f'<text x="{authored_x + bar_width/2}" y="{authored_y - 5}" class="bar-label">{authored_count}</text>')
+        
+        # Reviewed PR Bar
+        reviewed_count = reviewed_by_year.get(year, 0)
+        reviewed_h = (reviewed_count / y_max) * chart_height if y_max > 0 else 0
+        reviewed_x = authored_x + bar_width + bar_padding
+        reviewed_y = margin['top'] + chart_height - reviewed_h
+        svg_parts.append(f'<rect x="{reviewed_x}" y="{reviewed_y}" width="{bar_width}" height="{reviewed_h}" fill="url(#reviewedGradient)"/>')
+        svg_parts.append(f'<text x="{reviewed_x + bar_width/2}" y="{reviewed_y - 5}" class="bar-label">{reviewed_count}</text>')
+        
+        # Year Label
+        svg_parts.append(f'<text x="{group_x + group_width/2}" y="{margin["top"] + chart_height + 20}" text-anchor="middle" class="axis-label">{year}</text>')
+
+    # 圖例 (Legend)
+    legend_items = [("Merged PRs", "authoredGradient"), ("Reviewed PRs", "reviewedGradient")]
+    legend_x = margin['left']
+    for i, (text, color_id) in enumerate(legend_items):
+        svg_parts.append(f'<rect x="{legend_x}" y="15" width="12" height="12" fill="url(#{color_id})"/>')
+        svg_parts.append(f'<text x="{legend_x + 18}" y="25" class="legend-text">{text}</text>')
+        legend_x += 120
+    
+    # 統計數據和更新時間
+    total_authored = len(authored_prs)
+    total_reviewed = len(reviewed_prs)
+    update_time = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
+    svg_parts.append(f'<text x="{margin["left"]}" y="{height - 25}" class="stats-text">Total Merged PRs: {total_authored} | Total Reviewed PRs: {total_reviewed}</text>')
+    svg_parts.append(f'<text x="{margin["left"]}" y="{height - 10}" class="update-text">Last updated: {update_time}</text>')
+    
+    svg_parts.append('</svg>')
+    return "\n".join(svg_parts)
+
+
+# --- README Update Logic ---
+
+def update_readme() -> None:
+    """
+    主函式：獲取所有數據，生成圖表，並更新 README.md 文件。
+    """
     if not test_github_connection():
         return
-    
-    # 檢查 README 是否存在，如果不存在則創建
+
     try:
-        with open('README.md', 'r', encoding='utf-8') as file:
-            content = file.read()
+        with open(README_FILE_PATH, 'r', encoding='utf-8') as f:
+            content = f.read()
     except FileNotFoundError:
-        content = ""
-    
-    # 如果 README 是空的，創建基本結構
-    if not content.strip():
-        content = """<h1 align="center">Hi , I'm Han-Ju Chen</h1>
-
-Resume: [link](https://drive.google.com/file/d/1HlnmBUAPkuEfEA11emRpWD-kNGl5Worr/view?usp=sharing)
-
+        print(f"⚠️ 檔案 '{README_FILE_PATH}' 不存在，將創建一個新的。")
+        content = f"""<h1 align="center">Hi, I'm {GITHUB_USERNAME}</h1>
 ## 📊 Open Source Contributions
-
-### Flyte Organization Contributions
-<!-- FLYTEORG-CONTRIBUTIONS:START -->
-<!-- FLYTEORG-CONTRIBUTIONS:END -->
-
-### Ray Project Contributions
-<!-- RAY-PROJECT-CONTRIBUTIONS:START -->
-<!-- RAY-PROJECT-CONTRIBUTIONS:END -->
+"""
+        for org in ORGS_TO_PROCESS:
+            placeholder_name = org.upper().replace('-', '_')
+            content += f"""
+### {org.replace("-", " ").title()} Contributions
+<!-- {placeholder_name}_CONTRIBUTIONS:START -->
+<!-- {placeholder_name}_CONTRIBUTIONS:END -->
 """
 
-    for org in ['flyteorg', 'ray-project']:
-        print(f"\n📊 Fetching all data for {org}...")
+    for org in ORGS_TO_PROCESS:
+        print(f"\n🔄 正在處理 {org} 的貢獻...")
         
-        # Fetch all PR history
         authored_prs = fetch_all_prs(org, 'author')
         reviewed_prs = fetch_all_prs(org, 'reviewed')
         
-        print(f"✅ Found {len(authored_prs)} authored PRs and {len(reviewed_prs)} reviewed PRs for {org}")
+        chart_svg = generate_svg_chart(org, authored_prs, reviewed_prs)
         
-        # Generate chart
-        chart_svg = generate_contribution_chart(org, authored_prs, reviewed_prs)
+        # 替換 README 中的佔位符
+        placeholder_name = org.upper().replace('-', '_')
+        start_placeholder = f'<!-- {placeholder_name}-CONTRIBUTIONS:START -->'
+        end_placeholder = f'<!-- {placeholder_name}-CONTRIBUTIONS:END -->'
         
-        # Format the content with chart
-        new_content = f"""
-<div align="center">
-
-{chart_svg}
-
-</div>
-
-**Total Merged PRs**: {len(authored_prs)}  
-**Total Reviewed PRs**: {len(reviewed_prs)}  
-
-*Last updated: {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}*"""
-
-        placeholder_start = f'<!-- {org.upper()}-CONTRIBUTIONS:START -->'
-        placeholder_end = f'<!-- {org.upper()}-CONTRIBUTIONS:END -->'
-
-        # 檢查佔位符是否存在
-        if placeholder_start in content and placeholder_end in content:
+        if start_placeholder in content and end_placeholder in content:
+            new_section = f"{start_placeholder}\n<div align=\"center\">\n{chart_svg}\n</div>\n{end_placeholder}"
             content = re.sub(
-                f'{placeholder_start}.*?{placeholder_end}',
-                f'{placeholder_start}\n{new_content}\n{placeholder_end}',
+                f'{re.escape(start_placeholder)}.*?{re.escape(end_placeholder)}',
+                new_section,
                 content,
                 flags=re.DOTALL
             )
+            print(f"✅ 已更新 {org} 的貢獻圖表。")
         else:
-            print(f"❌ Placeholders not found for {org}")
-            print(f"Looking for: {placeholder_start} and {placeholder_end}")
+            print(f"❌ 在 README 中找不到 {org} 的佔位符。")
+            print(f"   請確保檔案中包含 '{start_placeholder}' 和 '{end_placeholder}'。")
 
-    with open('README.md', 'w', encoding='utf-8') as file:
-        file.write(content)
-    
-    print("\n🎉 README updated successfully!")
+    try:
+        with open(README_FILE_PATH, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print(f"\n🎉 README.md 更新成功！")
+    except IOError as e:
+        print(f"❌ 無法寫入檔案 '{README_FILE_PATH}'：{e}")
+
 
 if __name__ == '__main__':
     update_readme()
+
