@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Future-Outlier</h1>
-<h3 align="center">Solve the right problem at the right time using the right way. Richard Hamming</h3>
+<h3 align="center">Solve the right problem at the right time in the right place using the right way.</h3>
 
 - 📷 I film videos on [youtube](https://www.youtube.com/@future-outlier)
 - 📝 I regularly write articles on [medium](https://future-outlier.medium.com/)
