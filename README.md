@@ -1,4 +1,14 @@
+
 <h1 align="center">Hi 👋, I'm Future-Outlier</h1>
+
+<h1 align="center">Summary</h1>
+
+1. Open Source Experience (2.5+ years): 260+ PRs, 450+ reviews across ray-project & flyteorg
+2. Lead and mentor 20+ open-source contributors weekly for 1.5+ year, across ray-project & flyteorg
+3. Backend engineer with 1.5+ years of software development experience at Anyscale and Union.ai
+4. KubeCon EU 2026 speaker
+5. ICPC 2 times Bronze Award Winner
+
 <h3 align="center">Solve the right problem at the right time in the right place using the right way.</h3>
 
 - 📷 I film videos on [youtube](https://www.youtube.com/@future-outlier)
