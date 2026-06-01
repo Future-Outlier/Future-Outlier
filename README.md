@@ -3,10 +3,10 @@
 
 <h1 align="center">Summary</h1>
 
-1. Backend engineer with 2.5+ years of software development experience at Anyscale, Union.ai, and others
-2. Open Source Experience (2.5+ years): 260+ PRs, 450+ reviews across ray-project & flyteorg
-3. Lead and mentor 20 open-source contributors weekly for 1.5+ year, across ray-project & flyteorg
-4. KubeCon EU 2026 speaker
+1. Backend engineer with 3+ years of software development experience at Anyscale, Union.ai, and others
+2. Kubernetes Open Source Experience (3+ years): 270+ PRs, 480+ reviews across ray-project & flyteorg 
+3. KubeCon EU 2026 speaker on Multi-Cluster AI Inference
+4. Lead and mentor 20 open-source contributors weekly for 1.5+ year, across ray-project & flyteorg
 5. ICPC 2 times Bronze Award Winner
 
 <h2 align="center">Motto: Solve the right problem at the right time in the right place using the right way.</h2>
