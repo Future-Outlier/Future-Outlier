@@ -3,9 +3,9 @@
 
 <h1 align="center">Summary</h1>
 
-1. Backend engineer with 3+ years of software development experience at Anyscale, Union.ai, and others
+1. Backend engineer with 3+ years of software development experience at Anyscale, Union.ai, and prior internships
 2. Kubernetes related Open Source Experience (3+ years): 270+ PRs, 480+ reviews across ray-project & flyteorg
-3. KubeCon EU 2026 speaker on Multi-Cluster AI Inference
+3. KubeCon EU 2026 speaker — Resilient Multi-Cluster AI Inference (Karmada + KubeRay)
 4. Lead and mentor 20 open-source contributors weekly for 1.5+ year, across ray-project & flyteorg
 5. ICPC Regional Bronze Medalist ×2 (Taiwan Region)
 
